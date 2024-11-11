@@ -1,68 +1,76 @@
-# TP02 - Servlets J2EE
+TP03 - Servlets et JSP J2EE
+TP réalisé pour le TP03 du cours de J2EE (ING2, GSI) 2024-2025. Ce TP explore les interactions entre les servlets et les pages JSP pour gérer des formulaires, résoudre des équations et manipuler une matrice dynamique.
+Noms : Hadj Rabearimanana, Sekou Bah et Clément Praud
 
-TP réalisé pour le TP02 du cours de J2EE (ING2, GSI) 2024-2025. Ce TP consiste en la création de plusieurs servlets pour afficher des messages, effectuer des redirections, et gérer un système de login simple sans utiliser de JSP.
-Les noms: Hadj Rabearimanana, Sekou Bah et Clément Praud
-## Structure du Projet
+Structure du Projet
+Ce projet comprend trois exercices principaux, chacun avec des fonctionnalités spécifiques :
 
-Ce projet contient trois exercices, chacun sous la forme de servlets distinctes.
+Exigences Techniques
+Environnement J2EE (Java Servlet API)
+Serveur d'application compatible (ex : Apache Tomcat)
+Utilisation de JSP pour gérer l'interface utilisateur
+Contenu du Projet
+Exercice 1 : Système de Login - Servlet_Login
+L'objectif de cet exercice est de créer un formulaire de login et une servlet pour authentifier un utilisateur.
 
-## Exigences Techniques
-- Environnement J2EE (Java Servlet API)
-- Serveur d'application compatible (ex : Apache Tomcat)
-- Aucune utilisation de JSP (JavaServer Pages) conformément aux consignes
+Accès : /Servlet_Login
+Fonctionnalités :
+Page JSP Login.jsp : Contient deux champs pour le login et le mot de passe, ainsi qu'un bouton pour envoyer les informations.
+Vérification des Identifiants : La servlet Servlet_Login vérifie si les informations saisies sont correctes.
+Redirection vers resultat.jsp :
+Si les identifiants sont corrects, la page affiche le message « Welcome to your First JSP page ».
+Si les identifiants sont incorrects, la page affiche « Identification Failure ».
+HTML associé :
+login.jsp pour le formulaire de connexion.
+resultat.jsp pour afficher les messages de réussite ou d'échec.
+Exercice 2 : Résolution d'Équation du Second Degré - EquationServlet
+Cet exercice consiste à créer une page JSP pour saisir les coefficients d’une équation du second degré, puis utiliser une servlet pour résoudre l’équation.
 
-## Contenu du Projet
+Accès : /EquationServlet
+Fonctionnalités :
+Page JSP Formulaire.jsp : Permet à l’utilisateur de saisir les valeurs des coefficients a, b, et c.
+Résolution de l’Équation : La servlet EquationServlet calcule le discriminant d = b^2 - 4ac et détermine les racines selon sa valeur.
+Discriminant négatif : Affiche « Pas de racines réelles » en rouge.
+Discriminant nul : Affiche la racine double en bleu, calculée comme x = -b / 2a.
+Discriminant positif : Affiche les deux racines en vert, calculées comme x1 = (-b + √d) / 2a et x2 = (-b - √d) / 2a.
+HTML associé :
+Formulaire/index.jsp pour l'entrée des coefficients.
+resultat/index.jsp pour afficher les solutions de l'équation.
+Exercice 3 : Gestion de Matrice - MatriceServlet
+Cet exercice implique la création d'une servlet qui gère une matrice 10x10, permettant de l’afficher, de la réinitialiser, et de mettre à jour ses cellules.
 
-### Exercice 1 : Première Servlet - `HelloWorld`
+Accès : /MatriceServlet
+Fonctionnalités :
+Afficher la Matrice Complète : Lors d'une requête GET sans paramètres, la servlet renvoie le contenu de la matrice sous forme de table HTML.
+Afficher une Cellule Spécifique : Une requête GET avec les paramètres x et y affiche la valeur de la cellule (x, y). Si les indices sont hors limites, un message d'erreur s'affiche.
+Réinitialiser la Matrice : Une requête POST sans paramètres remet toutes les cellules de la matrice à zéro.
+Mettre à Jour une Cellule : Une requête POST avec les paramètres x, y, et val met à jour la cellule (x, y) avec la valeur val.
+Page JSP matrice.jsp : Fournit une interface pour effectuer les opérations ci-dessus sur la matrice.
+Installation et Déploiement
+Clonez le projet ou ajoutez les fichiers de code Java et JSP dans votre environnement de développement compatible avec J2EE.
+Compilez et déployez le projet sur un serveur d'application compatible (ex : Tomcat).
+Accédez aux servlets et aux pages JSP en suivant les chemins définis ci-dessus (par exemple, /Servlet_Login, /EquationServlet, et /MatriceServlet).
+Usage
+Login (Exercice 1) :
 
-La servlet `HelloServlet` affiche un message de bienvenue et l'heure système actuelle.
+Accédez à /login.jsp pour ouvrir le formulaire de login.
+Entrez les identifiants corrects pour accéder à la page de bienvenue ou un message d'erreur s'affichera en cas d'échec.
+Résolution d’Équation (Exercice 2) :
 
-- **Accès** : `/hello`
-- **Fonctionnalité** : Affiche le message `"Hello world, this is my first servlet"` ainsi que l'heure courante.
-- **HTML associé** : `index.html` permet de créer un lien pour accéder à cette servlet.
+Accédez à /Formulaire.jsp et saisissez les coefficients a, b, et c.
+La solution de l’équation s'affichera en fonction de la valeur du discriminant.
+Gestion de la Matrice (Exercice 3) :
 
-### Exercice 2 : Servlet de Redirection - `RedirectServlet`
-
-La servlet `RedirectServlet` redirige l'utilisateur vers une URL spécifiée dans les paramètres d'URL.
-
-- **Accès** : `/RedirectServlet`
-- **Paramètres** :
-  - `action=PageRedirect` - spécifie l'action de redirection.
-  - `page` - l'URL vers laquelle l'utilisateur sera redirigé.
-- **Exemple** : `/RedirectServlet?action=PageRedirect&page=http://google.fr` redirige vers Google France.
-
-### Exercice 3 : Servlet de Login - `LoginServlet`
-
-La servlet `LoginServlet` vérifie les identifiants d'un utilisateur via un formulaire de login.
-
-- **Accès** : `/LoginServlet`
-- **Fonctionnalités** :
-  - Affiche un formulaire de connexion avec nom d'utilisateur et mot de passe.
-  - Authentifie l'utilisateur avec les identifiants suivants : `J2EE` / `J2EE`.
-  - En cas de succès, affiche un formulaire de redirection qui utilise `RedirectServlet`.
-  - En cas d'échec, affiche un message d'erreur.
-- **Formulaire HTML associé** : `login.html` pour le formulaire de connexion.
-
-## Installation et Déploiement
-
-1. **Clonez le projet** ou ajoutez les fichiers de code Java dans votre environnement de développement compatible avec J2EE.
-2. **Compilez et déployez** le projet sur un serveur d'application compatible (ex : Tomcat).
-3. **Accédez aux servlets** en suivant les chemins définis ci-dessus (par exemple, `/hello`, `/RedirectServlet`, et `/LoginServlet`).
-
-## Usage
-
-1. **HelloServlet** : Accédez à `/hello` pour voir un message de bienvenue et l'heure système.
-2. **RedirectServlet** : Utilisez les paramètres `action=PageRedirect` et `page` pour rediriger vers l'URL souhaitée.
-3. **LoginServlet** :
-   - Accédez à `login.html` pour ouvrir le formulaire de login.
-   - Entrez les identifiants `J2EE` / `J2EE` pour accéder au formulaire de redirection.
-   - Si les identifiants sont incorrects, un message d'erreur s'affiche.
-
-## Notes
-
-- **Aucune JSP n'est utilisée** dans ce projet, conformément aux exigences du TP.
-- Le code HTML des formulaires et messages est généré directement dans les servlets.
-
-## Auteurs
-
+Accédez à /matriceOperation/matrice.jsp pour effectuer les différentes opérations de gestion de la matrice :
+Afficher la matrice complète.
+Afficher la valeur d'une cellule spécifique.
+Réinitialiser la matrice.
+Mettre à jour une cellule spécifique.
+Notes
+Les pages JSP servent d’interface utilisateur et utilisent des servlets pour traiter les informations et afficher les résultats.
+Chaque exercice présente une solution à une problématique spécifique en utilisant les servlets et JSP.
+Auteurs
 Ce projet a été réalisé dans le cadre du TP J2EE (ING2, GSI) 2024-2025.
+
+
+
